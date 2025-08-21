@@ -1,3 +1,4 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/56114bae-f5f3-41ac-a746-b5f1409153e7/deploy-status)](https://app.netlify.com/projects/xoarenaweb/deploys)
 <div align="center">
   <img src="assets/XOArena.png" alt="X.O. Arena Logo" width="120">
   <h1>X.O. Arena: A Modern Tic Tac Toe Game</h1>
