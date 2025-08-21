@@ -1,0 +1,719 @@
+/* CSS Custom Properties untuk tema dan warna */
+:root {
+    --primary-color: #4361ee;
+    --primary-dark: #3a56d4;
+    --secondary-color: #f72585;
+    --secondary-dark: #e51a75;
+    --accent-x: #4361ee;
+    --accent-o: #f72585;
+    --background: #f8f9fa;
+    --card-bg: rgba(255, 255, 255, 0.8);
+    --text-color: #2c3e50;
+    --text-light: #6c757d;
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    --shadow-dark: 0 8px 32px rgba(0, 0, 0, 0.2);
+    --win-highlight: #ffd166;
+    --glass-border: rgba(255, 255, 255, 0.18);
+    --transition: all 0.3s ease;
+}
+
+[data-theme="dark"] {
+    --background: #121212;
+    --card-bg: rgba(18, 18, 18, 0.8);
+    --text-color: #f8f9fa;
+    --text-light: #adb5bd;
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.05);
+}
+
+/* Reset dan base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--background);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    line-height: 1.6;
+    transition: var(--transition);
+    position: relative;
+    overflow-x: hidden;
+}
+
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(var(--primary-color) 1px, transparent 1px),
+        radial-gradient(var(--secondary-color) 1px, transparent 1px);
+    background-position: 0 0, 25px 25px;
+    background-size: 50px 50px;
+    opacity: 0.1;
+    animation: particlesMove 30s linear infinite;
+}
+
+@keyframes particlesMove {
+    0% { background-position: 0 0, 25px 25px; }
+    100% { background-position: 50px 50px, 75px 75px; }
+}
+
+/* Container utama */
+.container {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    z-index: 1;
+}
+
+/* Header styles */
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: var(--card-bg);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow);
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.header-controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.control-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: var(--card-bg);
+    color: var(--text-color);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+}
+
+.control-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Player Indicators */
+.player-indicators {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+    padding: 1rem;
+    background: var(--card-bg);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow);
+}
+
+.player-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    transition: var(--transition);
+    opacity: 0.6;
+    transform: scale(0.95);
+}
+
+.player-indicator.active {
+    opacity: 1;
+    transform: scale(1);
+    background: var(--card-bg);
+    box-shadow: var(--shadow);
+}
+
+.player-x.active {
+    border: 2px solid var(--accent-x);
+}
+
+.player-o.active {
+    border: 2px solid var(--accent-o);
+}
+
+.player-icon {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 0.25rem;
+}
+
+.player-x .player-icon {
+    color: var(--accent-x);
+}
+
+.player-o .player-icon {
+    color: var(--accent-o);
+}
+
+.player-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.player-score {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.vs-text {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-light);
+}
+
+/* Area info styles */
+.info-area {
+    width: 100%;
+    font-size: 1.25rem;
+    font-weight: 700;
+    padding: 1rem;
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: var(--transition);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+}
+
+/* Board styles - menggunakan CSS Grid untuk layout 3x3 */
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 12px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Cell styles */
+.cell {
+    aspect-ratio: 1/1;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3.5rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover effect untuk cell yang masih kosong */
+.cell:not(.x):not(.o):not(.disabled):hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+.cell:not(.x):not(.o):not(.disabled):hover::after {
+    content: attr(data-current-player);
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.3;
+}
+
+/* Style untuk X */
+.cell.x {
+    color: var(--accent-x);
+    text-shadow: 0 0 15px rgba(67, 97, 238, 0.4);
+}
+
+/* Style untuk O */
+.cell.o {
+    color: var(--accent-o);
+    text-shadow: 0 0 15px rgba(247, 37, 133, 0.4);
+}
+
+/* Style untuk cell yang sudah diisi atau game selesai */
+.cell.disabled {
+    cursor: not-allowed;
+}
+
+/* Style untuk cell yang menang */
+.cell.win {
+    animation: pulse 1s infinite;
+}
+
+/* Animasi untuk cell yang menang */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Winning line */
+.win-line {
+    position: absolute;
+    background: var(--win-highlight);
+    z-index: 2;
+    border-radius: 4px;
+    opacity: 0;
+    transition: all 0.5s ease;
+    box-shadow: 0 0 10px var(--win-highlight);
+}
+
+/* Kurangi animasi untuk pengguna yang memilih reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .cell, .info-area, .player-indicator {
+        transition: none;
+    }
+    
+    .cell.win {
+        animation: none;
+    }
+}
+
+/* Controls styles */
+.controls {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 1.5rem;
+    background: var(--card-bg);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow);
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.control-group h3 {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    margin-bottom: 0.25rem;
+}
+
+.mode-buttons, .difficulty-buttons {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.mode-btn, .difficulty-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: 1px solid var(--glass-border);
+    border-radius: 50px;
+    cursor: pointer;
+    background: transparent;
+    color: var(--text-color);
+    transition: var(--transition);
+}
+
+.mode-btn:hover, .difficulty-btn:hover {
+    transform: translateY(-2px);
+}
+
+.mode-btn.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.difficulty-btn.active {
+    background: var(--secondary-color);
+    color: white;
+    border-color: var(--secondary-color);
+}
+
+.ai-difficulty {
+    display: none;
+}
+
+.ai-difficulty.visible {
+    display: flex;
+}
+
+/* Button styles */
+.btn {
+    padding: 0.85rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+}
+
+.btn.primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn.primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(67, 97, 238, 0.3);
+}
+
+.btn.secondary {
+    background: transparent;
+    color: var(--text-color);
+    border: 2px solid var(--glass-border);
+}
+
+.btn.secondary:hover {
+    background: var(--card-bg);
+    transform: translateY(-2px);
+}
+
+/* Scoreboard */
+.scoreboard {
+    width: 100%;
+    padding: 1.5rem;
+    background: var(--card-bg);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow);
+}
+
+.scoreboard h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: var(--text-light);
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.x-stat .stat-value {
+    color: var(--accent-x);
+}
+
+.o-stat .stat-value {
+    color: var(--accent-o);
+}
+
+.draw-stat .stat-value {
+    color: var(--text-light);
+}
+
+/* Footer styles */
+.footer {
+    margin-top: 2rem;
+    text-align: center;
+    color: var(--text-light);
+    opacity: 0.8;
+}
+
+.heart {
+    color: var(--secondary-color);
+    animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    5% { transform: scale(1.1); }
+    10% { transform: scale(1); }
+    15% { transform: scale(1.1); }
+    20% { transform: scale(1); }
+    100% { transform: scale(1); }
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 1.5rem;
+    width: 90%;
+    max-width: 500px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow);
+    transform: translateY(-50px);
+    transition: var(--transition);
+}
+
+.modal.show .modal-content {
+    transform: translateY(0);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.modal-header h2 {
+    font-size: 1.5rem;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+.modal-body {
+    margin-bottom: 1.5rem;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.modal-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.modal-btn.primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.modal-btn.secondary {
+    background: transparent;
+    color: var(--text-color);
+    border: 2px solid var(--glass-border);
+}
+
+.modal-btn:hover {
+    transform: translateY(-2px);
+}
+
+.rules {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.rule {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    background: var(--card-bg);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+}
+
+.rule-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    font-weight: 700;
+}
+
+/* Confetti canvas */
+#confetti-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;
+}
+
+/* Responsive styles untuk mobile */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .header h1 {
+        font-size: 2rem;
+    }
+    
+    .player-indicators {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .vs-text {
+        display: none;
+    }
+    
+    .board {
+        max-width: 320px;
+        grid-gap: 8px;
+    }
+    
+    .cell {
+        font-size: 2.5rem;
+    }
+    
+    .controls {
+        padding: 1rem;
+    }
+    
+    .mode-buttons, .difficulty-buttons {
+        flex-direction: column;
+    }
+    
+    .stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .modal-footer {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        gap: 1rem;
+    }
+    
+    .header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .info-area {
+        font-size: 1.1rem;
+        padding: 0.75rem;
+    }
+    
+    .board {
+        max-width: 280px;
+    }
+    
+    .cell {
+        font-size: 2.2rem;
+    }
+    
+    .btn {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.9rem;
+    }
+}

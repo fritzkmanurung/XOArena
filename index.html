@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XOArena</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="assets/tab.png">
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="background-animation">
+        <div class="particles"></div>
+    </div>
+
+    <div class="container">
+        <!-- Header dengan judul game -->
+        <header class="header">
+            <h1>Tic Tac Toe</h1>
+            <div class="header-controls">
+                <button id="sound-toggle" class="control-btn" aria-label="Toggle Sound">
+                    <i class="fas fa-volume-up"></i>
+                </button>
+                <button id="dark-mode-toggle" class="control-btn" aria-label="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="help-btn" class="control-btn" aria-label="Show Help">
+                    <i class="fas fa-question"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Player Indicators -->
+        <div class="player-indicators">
+            <div class="player-indicator player-x active">
+                <span class="player-icon">X</span>
+                <span class="player-name">Player X</span>
+                <span class="player-score" id="player-x-score">0</span>
+            </div>
+            <div class="vs-text">VS</div>
+            <div class="player-indicator player-o">
+                <span class="player-icon">O</span>
+                <span class="player-name">Player O</span>
+                <span class="player-score" id="player-o-score">0</span>
+            </div>
+        </div>
+
+        <!-- Area info untuk menampilkan giliran pemain atau hasil game -->
+        <div class="info-area" id="info-area">
+            <span class="current-turn">Player X's Turn</span>
+        </div>
+
+        <!-- Game board dengan grid 3x3 -->
+        <div class="board" id="board">
+            <div class="cell" data-index="0"></div>
+            <div class="cell" data-index="1"></div>
+            <div class="cell" data-index="2"></div>
+            <div class="cell" data-index="3"></div>
+            <div class="cell" data-index="4"></div>
+            <div class="cell" data-index="5"></div>
+            <div class="cell" data-index="6"></div>
+            <div class="cell" data-index="7"></div>
+            <div class="cell" data-index="8"></div>
+        </div>
+
+        <!-- Winning Line -->
+        <div class="win-line" id="win-line"></div>
+
+        <!-- Area kontrol dengan tombol restart dan mode -->
+        <div class="controls">
+            <div class="control-group">
+                <h3>Game Mode</h3>
+                <div class="mode-buttons">
+                    <button id="pvp-btn" class="mode-btn active">Player vs Player</button>
+                    <button id="ai-btn" class="mode-btn">Player vs AI</button>
+                </div>
+            </div>
+
+            <div class="control-group ai-difficulty" id="ai-difficulty">
+                <h3>AI Difficulty</h3>
+                <div class="difficulty-buttons">
+                    <button class="difficulty-btn active" data-difficulty="easy">Easy</button>
+                    <button class="difficulty-btn" data-difficulty="medium">Medium</button>
+                    <button class="difficulty-btn" data-difficulty="hard">Hard</button>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <button id="restart-btn" class="btn primary">Restart Game</button>
+                <button id="new-match-btn" class="btn secondary">New Match</button>
+            </div>
+        </div>
+
+        <!-- Scoreboard -->
+        <div class="scoreboard">
+            <h3>Match Statistics</h3>
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-value" id="x-wins">0</span>
+                    <span class="stat-label">X Wins</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value" id="o-wins">0</span>
+                    <span class="stat-label">O Wins</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value" id="draws">0</span>
+                    <span class="stat-label">Draws</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer untuk kredit -->
+        <footer class="footer">
+            <p>Made with <span class="heart">❤️</span> by Developer</p>
+        </footer>
+    </div>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Help Modal -->
+    <div id="help-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>How to Play</h2>
+                <button id="close-help" class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Tic Tac Toe is a game where two players take turns marking spaces in a 3×3 grid.</p>
+                <div class="rules">
+                    <div class="rule">
+                        <span class="rule-icon">X</span>
+                        <p>Player X goes first</p>
+                    </div>
+                    <div class="rule">
+                        <span class="rule-icon">O</span>
+                        <p>Player O goes second</p>
+                    </div>
+                    <div class="rule">
+                        <span class="rule-icon"><i class="fas fa-trophy"></i></span>
+                        <p>The first player to get 3 of their marks in a row (up, down, across, or diagonally) wins</p>
+                    </div>
+                    <div class="rule">
+                        <span class="rule-icon"><i class="fas fa-handshake"></i></span>
+                        <p>If all 9 squares are full and there's no winner, the game ends in a draw</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div id="gameover-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="gameover-title">Game Over</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="gameover-message"></p>
+            </div>
+            <div class="modal-footer">
+                <button id="play-again-btn" class="modal-btn primary">Play Again</button>
+                <button id="new-match-modal-btn" class="modal-btn secondary">New Match</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="place-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-plastic-tap-2926.mp3" preload="auto"></audio>
+    <audio id="win-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-winning-chimes-2015.mp3" preload="auto"></audio>
+    <audio id="draw-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-game-show-buzz-in-3090.mp3" preload="auto"></audio>
+    <audio id="click-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3" preload="auto"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
